@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.Vector2;
 public class Rec2D {
     public Vector2 Scale;
     public Vector2 Position;
-    public Vector2 Veloicty;
     public Texture RecTexture;
     private Pixmap _pixilMap;
     private Color _recColor;
@@ -16,12 +15,15 @@ public class Rec2D {
     public int XPosition;
     public int YPosition;
 
-    Rec2D (Vector2 scale, Vector2 pos, Vector2 velocity, Color color)
+    Rec2D (Vector2 scale, Vector2 pos, Color color)
     {
         Scale = scale;
         Position = pos;
-        Veloicty = velocity;
         _recColor = color;
+        XPosition = (int) this.Position.x;
+        YPosition = (int) this.Position.y;
+        Width = (int) scale.x;
+        Height = (int) scale.y;
         generateTexture();
     }
 
