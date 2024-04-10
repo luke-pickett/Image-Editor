@@ -9,7 +9,7 @@ public class Rec2D {
     public Vector2 Position;
     public Texture RecTexture;
     private Pixmap _pixilMap;
-    private Color _recColor;
+    protected Color _recColor;
     public int Width;
     public int Height;
     public int XPosition;
@@ -24,10 +24,11 @@ public class Rec2D {
         YPosition = (int) this.Position.y;
         Width = (int) scale.x;
         Height = (int) scale.y;
+        ImageEditor.Instance.Rectangles.add(this);
         generateTexture();
     }
 
-    private void generateTexture() {
+    public void generateTexture() {
         Pixmap rectangleMap = new Pixmap((int) Scale.x, (int) Scale.y, Pixmap.Format.RGBA8888);
         rectangleMap.setColor(_recColor);
         for (int x = 0; x < rectangleMap.getWidth(); x++) {
