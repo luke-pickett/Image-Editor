@@ -3,6 +3,7 @@ package com.mygdx.image_editor;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -25,6 +26,8 @@ public class ImageEditor extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
+		new ImageInputOutput();
+		Pixmap editMap = ImageInputOutput.Instance.loadImage("blackbuck.bmp");
 		batch = new SpriteBatch();
 		ScreenSize = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		InputManager inputManager = new InputManager();
@@ -34,8 +37,10 @@ public class ImageEditor extends ApplicationAdapter {
 		_editWindow = new EditWindow(
 				editWindowSize, new Vector2(ScreenSize.x - editWindowSize.x, 0), Color.GRAY
 		);
+		_editWindow.DoodleTexture = new Texture(editMap);
 		button = new Button(rectangleScale, new Vector2(0,0), Color.YELLOW);
 		CollisionManager.Instance = new CollisionManager();
+
 	}
 
 	@Override
