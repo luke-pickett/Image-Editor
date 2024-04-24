@@ -1,9 +1,11 @@
 package com.mygdx.image_editor;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class InputManager implements InputProcessor {
@@ -12,17 +14,28 @@ public class InputManager implements InputProcessor {
     static InputManager Instance;
     private IClickable _currentlyClicked;
     private IHoverable _currentlyHovered;
+    private boolean _controlPressed;
     public InputManager() {
         Instance = this;
     }
 
     @Override
     public boolean keyDown(int i) {
+        if (_controlPressed && i == Input.Keys.S) {
+            try {
+                ImageInputOutput.Instance.saveImage("C:\\Users\\engoo\\Desktop\\test\\output.bmp");
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (i == Input.Keys.CONTROL_LEFT) _controlPressed = true;
         return false;
     }
 
     @Override
     public boolean keyUp(int i) {
+        if (i == Input.Keys.CONTROL_LEFT) _controlPressed = false;
         return false;
     }
 

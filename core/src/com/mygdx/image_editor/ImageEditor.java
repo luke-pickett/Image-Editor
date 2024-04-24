@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ImageEditor extends ApplicationAdapter {
@@ -23,11 +24,16 @@ public class ImageEditor extends ApplicationAdapter {
 	public ImageEditor() {
 		Instance = this;
 	}
+
+	public void filesImported(String[] filePaths) {
+		Pixmap map = ImageInputOutput.Instance.loadImage(filePaths[0]);
+		if (map == null) return;
+		_editWindow.RecTexture = new Texture(map);
+	}
 	
 	@Override
 	public void create () {
 		new ImageInputOutput();
-		Pixmap editMap = ImageInputOutput.Instance.loadImage("blackbuck.bmp");
 		batch = new SpriteBatch();
 		ScreenSize = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		InputManager inputManager = new InputManager();
@@ -35,13 +41,11 @@ public class ImageEditor extends ApplicationAdapter {
 		Vector2 rectangleScale = new Vector2(100, 50);
 		Vector2 editWindowSize = new Vector2(500, ScreenSize.y - 50);
 		_editWindow = new EditWindow(
-				editWindowSize, new Vector2(ScreenSize.x - editWindowSize.x, 0), Color.GRAY
+				editWindowSize, new Vector2(ScreenSize.x - editWindowSize.x, 0)
 		);
-		_editWindow.DoodleTexture = new Texture(editMap);
 		button = new Button(rectangleScale, new Vector2(0,0), Color.YELLOW);
 		CollisionManager.Instance = new CollisionManager();
-
-	}
+    }
 
 	@Override
 	public void render () {
