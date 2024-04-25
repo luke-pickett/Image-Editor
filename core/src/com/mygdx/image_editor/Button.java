@@ -3,6 +3,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class Button extends Rec2D implements IClickable, IHoverable {
+    public String ButtonText;
     @Override
     public void onHovered() {
         if (_state == ButtonState.Clicked) {
@@ -22,7 +23,7 @@ public class Button extends Rec2D implements IClickable, IHoverable {
 
     public enum ButtonState {Clicked, Hovered, None}
     private ButtonState _state;
-    private Color _startColor;
+    protected Color _startColor;
     private Color _hoveredColor;
     public Button(Vector2 scale, Vector2 position, Color recColor) {
         super (scale, position, recColor);

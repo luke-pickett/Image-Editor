@@ -10,10 +10,20 @@ import java.io.IOException;
 
 public class ImageInputOutput {
     public static ImageInputOutput Instance;
+    public String ImageFolderLocation;
     private byte[] _fileHeader;
     private Pixmap _pixels;
     public ImageInputOutput() {
         Instance = this;
+    }
+
+    private String scrapeFolderLocation(String filePath) {
+        StringBuilder builder = new StringBuilder(filePath);
+        for (int i = filePath.length() - 1; i >= 0; i--) {
+            if (filePath.charAt(i) != '\\') continue;
+            return builder.substring(0, i);
+        }
+        return null;
     }
 
     public Pixmap loadImage(String filePath) {
@@ -55,6 +65,7 @@ public class ImageInputOutput {
             }
         }
         _pixels = pixels;
+        ImageFolderLocation = scrapeFolderLocation(filePath);
         return pixels;
     }
 

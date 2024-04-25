@@ -10,15 +10,19 @@ public class EditWindow extends Rec2D implements IClickable{
     public Texture DoodleTexture;
     public Pixmap DoodleMap;
     private Vector2 _previousPaintPosition;
+    public Color DrawColor;
 
     public EditWindow(Vector2 scale, Vector2 position) {
         super(scale, position, Color.GRAY);
         DoodleMap = new Pixmap((int) scale.x, (int) scale.y, Pixmap.Format.RGBA8888);
-        DoodleMap.setColor(Color.ORANGE);
+        DrawColor = Color.ORANGE;
+        DoodleMap.setColor(DrawColor);
         DoodleTexture = new Texture(DoodleMap);
         InputManager.Instance.clickables.add(this);
         Instance = this;
     }
+
+
 
     private void paintAtPosition(Vector2 worldPosition) {
         Vector2 paintPosition = new Vector2(worldPosition.x - XPosition, Scale.y - worldPosition.y);

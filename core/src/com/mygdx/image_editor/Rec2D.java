@@ -24,8 +24,8 @@ public class Rec2D {
         YPosition = (int) this.Position.y;
         Width = (int) scale.x;
         Height = (int) scale.y;
-        ImageEditor.Instance.Rectangles.add(this);
         generateTexture();
+        ImageEditor.Instance.Rectangles.add(this);
     }
 
     public void generateTexture() {

@@ -22,8 +22,9 @@ public class InputManager implements InputProcessor {
     @Override
     public boolean keyDown(int i) {
         if (_controlPressed && i == Input.Keys.S) {
+            if (ImageInputOutput.Instance.ImageFolderLocation == null) return false;
             try {
-                ImageInputOutput.Instance.saveImage("C:\\Users\\engoo\\Desktop\\test\\output.bmp");
+                ImageInputOutput.Instance.saveImage(ImageInputOutput.Instance.ImageFolderLocation+"\\output.bmp");
             }
             catch (IOException e) {
                 e.printStackTrace();
@@ -95,6 +96,7 @@ public class InputManager implements InputProcessor {
             _currentlyHovered = collision;
             collision.onHovered();
         }
+        if (collision != _currentlyHovered) _currentlyHovered = null;
         return true;
     }
 
